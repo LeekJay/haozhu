@@ -16,9 +16,12 @@ async def main():
     # 方式2: 通过 .env 文件配置（推荐）
     # 复制 .env.example 为 .env 并填入实际值
     async with HaoZhuClient() as client:
-        # 1. 登录（如果未配置 token）
-        token = await client.login()
-        print(f"登录成功，Token: {token[:16]}...")
+        # 1. 登录（如果已配置 token 则跳过）
+        if not settings.token:
+            token = await client.login()
+            print(f"登录成功，Token: {token[:16]}...")
+        else:
+            print("使用已配置的 Token")
 
         # 2. 获取账号信息
         info = await client.get_account_info()
@@ -27,8 +30,10 @@ async def main():
 
         # 3. 获取号码（通过 HAOZHU_SID 环境变量配置）
         sid = settings.sid
+        author = settings.author
+        print(f"使用项目 SID: {sid}, Author: {author}")
         try:
-            phone = await client.get_phone(sid=sid)
+            phone = await client.get_phone(sid=sid, author=author)
             print(f"获取号码: {phone.phone}")
             print(f"运营商: {phone.sp}")
             print(f"归属地: {phone.phone_gsd}")
