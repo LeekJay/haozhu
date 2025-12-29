@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.showdoc.com.cn)",
+      "WebFetch(domain:r.jina.ai)"
+    ]
+  }
+}
