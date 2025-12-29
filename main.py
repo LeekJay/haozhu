@@ -2,7 +2,7 @@
 
 import asyncio
 
-from haozhu import HaoZhuClient, MessageNotReadyError, setup_logging
+from haozhu import HaoZhuClient, MessageNotReadyError, settings, setup_logging
 
 
 async def main():
@@ -25,8 +25,8 @@ async def main():
         print(f"账户余额: {info.money} 元")
         print(f"最大区号: {info.num}")
 
-        # 3. 获取号码（需替换为实际项目ID）
-        sid = 106816  # 替换为实际项目ID
+        # 3. 获取号码（通过 HAOZHU_SID 环境变量配置）
+        sid = settings.sid
         try:
             phone = await client.get_phone(sid=sid)
             print(f"获取号码: {phone.phone}")

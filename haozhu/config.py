@@ -31,6 +31,9 @@ class HaoZhuSettings(BaseSettings):
     log_level: str = "INFO"
     log_requests: bool = False  # 是否记录请求详情
 
+    # 项目配置
+    sid: int = 0  # 默认项目ID
+
 
 # 全局配置实例
 settings = HaoZhuSettings()
