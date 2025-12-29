@@ -244,8 +244,10 @@ class HaoZhuClient:
             params["exclude_prefix"] = exclude_prefix
         if uid:
             params["uid"] = uid
-        if author:
-            params["author"] = author
+        # author 优先使用参数，其次使用配置
+        _author = author if author is not None else self._config.author
+        if _author:
+            params["author"] = _author
 
         data = await self._request("getPhone", **params)
         self._check_response(data, "获取号码")
@@ -288,8 +290,10 @@ class HaoZhuClient:
             "sid": sid,
             "phone": phone,
         }
-        if author:
-            params["author"] = author
+        # author 优先使用参数，其次使用配置
+        _author = author if author is not None else self._config.author
+        if _author:
+            params["author"] = _author
 
         data = await self._request("getPhone", **params)
         self._check_response(data, "指定号码")

@@ -33,6 +33,7 @@ class HaoZhuSettings(BaseSettings):
 
     # 项目配置
     sid: int = 0  # 默认项目ID
+    author: str = ""  # 开发者账号（用于消费分成）
 
 
 # 全局配置实例
